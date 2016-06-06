@@ -1,0 +1,40 @@
+//
+   Created by D on 7.5.2016 ã..
+.row#registration-panel(ng-controller="RegisterFormController")
+    .col-md-5
+        .panel.panel-default
+            .panel-heading.panel-heading-custom
+                h3.panel-title  Registration Form
+            .panel-body
+                form.form-horizontal#registration-form(name="regForm" novalidate)
+                    .input-group(ng-class="{ 'has-error': regForm.user.$invalid, 'has-success': !regForm.user.$invalid }")
+                        span.input-group-addon
+                            i.glyphicon.glyphicon-user
+                        input#username-tf.form-control(type="text" name="user"  ng-model="user.username" placeholder="username" ng-pattern="validations.username.regex" username required)
+                    span.help-block(ng-show="regForm.user.$error.pattern") {{validations.username.message}}
+                    span.help-block(ng-show="regForm.user.$pending.username") Checking if this name is available...
+                    span.help-block(ng-show="regForm.user.$error.username")  This username is already taken!
+                    //span.help-block(ng-show="regForm.user.$error.required")  Required field.
+                    .input-group(ng-class="{ 'has-error': regForm.email.$invalid, 'has-success': !regForm.email.$invalid  }")
+                        span.input-group-addon
+                            b @
+                        input#username-tf.form-control(type="email" name="email" ng-model="user.profile.email" placeholder="email" required)
+                    //span.help-block(ng-show="regForm.email.$error.required") Required field.
+                    span.help-block(ng-show="regForm.email.$error.email") Invalid email.
+                    .input-group(ng-class="{ 'has-error': regForm.name.$invalid, 'has-success': !regForm.name.$invalid  }")
+                        span.input-group-addon
+                            i.glyphicon.glyphicon-user
+                        input#username-tf.form-control(type="text" name="name" ng-model="user.profile.name" ng-pattern="validations.personalName.regex" placeholder="Personal name" required)
+                    //span.help-block(ng-show="regForm.name.$error.required") Required field.
+                    span.help-block(ng-show="regForm.name.$error.pattern")  {{validations.personalName.message}}
+                    .input-group(ng-class="{ 'has-error': regForm.password.$invalid, 'has-success': !regForm.password.$invalid  }")
+                        span.input-group-addon
+                            i.glyphicon.glyphicon-lock
+                        input#password-tf.form-control(type="password" name="password" ng-model="user.password" placeholder="Password" ng-pattern="validations.password.regex" required)
+                    //span.help-block(ng-show="regForm.password.$error.required") Required field.
+                    span.help-block(ng-show="regForm.password.$error.pattern") {{validations.password.message}}
+                    .form-group
+                        .col-md-offset-3.col-md-2
+                            input.btn.btn-success(ng-disabled="!regForm.$valid" value="Register" type="button" ng-click="register()")
+                        .col-md-2
+                            a.btn.btn-warning(href="/#/project/all") Cancel

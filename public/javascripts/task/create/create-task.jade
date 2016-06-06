@@ -1,0 +1,26 @@
+//
+   Created by D on 29.4.2016 ã..
+div(ng-controller="CreateTaskCtrl")
+    .row
+        .panel.panel-default
+            .panel-heading.panel-heading-custom
+                h3.panel-title Create Task
+            .panel-body
+                form(name="createTask" novalidate)
+                    .form-group
+                        label(for="task-name-text") Task Name
+                        input.form-control(type="text" ng-model="task.name" placeholder="Enter task name" id="task-name-text" required)
+                    .form-group
+                        label(for="task-description-textarea") Task Description
+                        textarea.form-control(rows="3" ng-model="task.description" placeholder="Enter task description" id="task-description-textarea")
+                    .form-group
+                        label(for="task-time-number") Time for completion (MD)
+                        input.form-control(type="number" ng-model="task.overallTime" min="0" max="200" step="0.5" value="0" id="task-time-number" required)
+                    .form-group
+                        label(for="task-priority-number") Priority
+                        select.form-control(ng-model="task.priority" required)
+                            option(value="1") Low
+                            option(value="2") Medium
+                            option(value="3") High
+                    .form-group
+                        input.btn.btn-default.btn-primary(type="button" ng-disabled="!createTask.$valid" ng-click="addToProject()" id="create-task-btn" value="Create")

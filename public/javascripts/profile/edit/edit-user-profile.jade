@@ -1,0 +1,35 @@
+//
+   Created by D on 27.5.2016 ã..
+.col-md-12(ng-controller="EditUserProfileCtrl")
+    .panel.panel-default
+        .panel-body
+            .row
+                .col-md-2
+                    a.thumbnail(href="")
+                        img(ng-src="/images/avatars/{{profile.avatar.name}}" alt="300x300" )
+                    //input.btn.btn-default.btn-file(type="file" nv-file-select="" uploader="uploader")
+                    label.btn.btn-default.btn-file Browse
+                        input(type="file" nv-file-select="" uploader="uploader" style="display:none;")
+                    button.btn.btn-default.pull-right(ng-click="uploader.uploadAvatar()") Upload
+                .col-md-7
+                    form.form-horizontal
+                        .form-group
+                            label.col-md-2.control-label(for="profile-name") Name
+                            .col-md-10
+                                input#profile-name.form-control(ng-model="profile.name")
+                        .form-group
+                            label.col-md-2.control-label(for="profile-name") Position
+                            .col-md-10
+                                input#profile-name.form-control(ng-model="profile.position")
+                        hr
+                        .form-group
+                            label.col-md-2.control-label(for="profile-name") Email
+                            .col-md-10
+                                input#profile-name.form-control(ng-model="profile.email")
+                        .form-group
+                            label.col-md-2.control-label(for="profile-name") Phone
+                            .col-md-10
+                                input#profile-name.form-control(ng-model="profile.phone")
+                        .form-group
+                            .col-md-offset-2.col-md-2
+                                button.btn.btn-default(ng-click="updateProfile()") Submit

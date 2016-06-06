@@ -1,0 +1,56 @@
+//
+   Created by D on 29.4.2016 ã..
+div#view-single-project-cnt(ng-controller="ProjectViewCtrl")
+    .row
+        .col-md-5
+            .panel.panel-default
+                .panel-heading.panel-heading-custom
+                    //.row
+                    //.col-md-7
+                    h3.panel-title.pull-left {{project.name}}
+                    //.col-md-offset-9(ng-show="identity.isAuthenticated()")
+                    a.btn.btn-success.pull-right(ng-show="identity.isAuthenticated()" href="#/project/edit/{{project._id}}")
+                        span.glyphicon.glyphicon-edit
+                    //button.btn.btn-default.pull-right(ng-show="identity.isAuthenticated()" href="#/project/edit/{{project._id}}") Edit
+                    .clearfix
+                .list-group
+                    a.list-group-item(href="")
+                        h4.list-group-item-heading Description
+                        p.list-group-item-text {{project.description}}
+                    a.list-group-item(href="")
+                        h4.list-group-item-heading Overall Time
+                        p.list-group-item-text {{project.overallTime}} man days
+                    a.list-group-item(href="")
+                        h4.list-group-item-heading Participants
+                        //p.list-group-item-text
+                        //   a.btn(ng-repeat="p in project.participants" ng-href="/#/profile/{{p._id}}" ) {{p.name}}
+                        //.list-group
+                        a.list-group-item(ng-repeat="p in project.participants" ng-click="" ng-href="/#/profile/{{p._id}}") {{p.name}}
+                            span.pull-right.glyphicon.glyphicon-user(aria-hidden="true")
+                    a.list-group-item(href="")
+                        h4.list-group-item-heading Progress
+                        p.list-group-item-text
+                            uib-progressbar(id="progress-bar" max="100" type="{{project.progressBarType}}" value="project.progress")
+                                span(style="color:white; white-space:nowrap;") Progress: {{project.progress}}%
+                .panel-body.view-project
+                    h3  Tasks
+                    uib-accordion#tasks-panel(close-others="oneAtATime")
+                        uib-accordion-group.project-view(ng-repeat="task in project.tasks" heading="{{task.name}}" )
+                            .list-group
+                                a.list-group-item(href="")
+                                    h4.list-group-item-heading Description
+                                    p.list-group-item-text {{task.description}}
+                                a.list-group-item(href="")
+                                    h4.list-group-item-heading Time for completion
+                                    p.list-group-item-text {{task.overallTime}}
+                                a.list-group-item(href="")
+                                    h4.list-group-item-heading Priority
+                                    p.list-group-item-text {{task.priority}}
+                                a.list-group-item(href="")
+                                    h4.list-group-item-heading Progress
+                                    p.list-group-item-text
+                                        uib-progressbar(id="progress-bar" max="100" value="task.completion")
+                                            span(style="color:white; white-space:nowrap;") {{task.completion}}%
+                                        div(ng-show="identity.isAuthenticated()")
+                                            button.btn.btn-success(ng-click="open(task)")
+                                                span.glyphicon.glyphicon-edit

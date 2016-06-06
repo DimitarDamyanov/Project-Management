@@ -1,0 +1,42 @@
+//
+   Created by D on 29.4.2016 ã..
+div#my-projects(ng-controller="UserProjectsCtrl")
+    .panel.panel-default(ng-repeat="project in projects")
+        .panel-heading.panel-heading-custom
+            h4.panel-title
+                a(href='#/project/{{project._id}}') {{project.name}}
+        .list-group
+            a.list-group-item(href="")
+                h4.list-group-item-heading Description
+                p.list-group-item-text {{project.description}}
+            a.list-group-item(href="")
+                h4.list-group-item-heading Overall Time
+                p.list-group-item-text {{project.overallTime}} man days
+            a.list-group-item(href="")
+                h4.list-group-item-heading Participants
+                p.list-group-item-text
+                    ul.list-inline
+                        li(ng-repeat="p in project.participants")
+                            button.btn  {{p.name}}
+            a.list-group-item(href="")
+                h4.list-group-item-heading Progress
+                p.list-group-item-text
+                    uib-progressbar(id="progress-bar" max="100" type="{{project.progressBarType}}" value="project.progress")
+                        span(style="color:white; white-space:nowrap;") Progress: {{project.progress}}%
+        //.panel-body
+        //   div
+        //      b
+        //        i  Description:
+        //      | {{project.description}}
+        //   div
+        //      b
+        //         i Overall Time:
+        //      | {{project.overallTime}} man days
+        //   div
+        //      b
+        //         i Participants:
+        //         ul.list-inline
+        //            li(ng-repeat="p in project.participants") {{p.name}}
+        //   div
+        //      uib-progressbar(id="progress-bar" max="100"  value="project.progress")
+        //         span(style="color:white; white-space:nowrap;") Progress: {{project.progress}}%

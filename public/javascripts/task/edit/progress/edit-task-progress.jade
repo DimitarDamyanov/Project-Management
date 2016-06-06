@@ -1,0 +1,10 @@
+.modal-header
+    h3.modal-title Edit Task Progress
+.modal-body
+    div
+        label(for="task-progress-input") Progress
+        input#task-progress-input.form-control(ng-model="task.completion" type="number" min=0 max=100)
+.modal-footer
+    button.btn.btn-primary(ng-click="ok()") OK
+    button.btn.btn-warning(ng-click="cancel()") Cancel
+

@@ -1,0 +1,54 @@
+//
+   Created by D on 29.4.2016 ã..
+div#edit-project-cnt(ng-controller="EditProjectCtrl")
+    .row
+        .col-md-5
+            .panel.panel-default
+                .panel-heading.panel-heading-custom
+                    h3.panel-title  Edit Project
+                .panel-body
+                    form
+                        .form-group
+                            label(for="project-name-text") Project Name
+                            input.form-control(type="text" ng-model= "project.name" placeholder="Enter project name" id="project-name-text")
+                        .form-group
+                            label(for="project-description-textarea") Project Description
+                            textarea.form-control(rows="3" ng-model= "project.description" placeholder="Enter project description" id="project-description-textarea")
+                        .form-group
+                            label(for="project-time-number") Time for completion (MD)
+                            input.form-control(type="number" ng-model= "project.overallTime" id="project-time-number")
+                        //.form-group
+                        //   input.btn.btn-default(type="button" ng-click="" id="add-task-btn" value="Add task")
+                        .form-group
+                            label(for="tasks-panel") Tasks
+                            uib-accordion#tasks-panel(close-others="oneAtATime")
+                                uib-accordion-group(ng-repeat="task in project.tasks" heading="{{task.name}}")
+                                    form#task-edit
+                                        .form-group
+                                            label(for="task-name-text") Task Name
+                                            input.form-control(type="text" ng-model="task.name" placeholder="Enter task name" id="task-name-text")
+                                        .form-group
+                                            label(for="task-description-textarea") Task Description
+                                            textarea.form-control(rows="3" ng-model="task.description" placeholder="Enter task description" id="task-description-textarea")
+                                        .form-group
+                                            label(for="task-time-number") Time for completion (MD)
+                                            input.form-control(type="number" ng-model="task.overallTime" min="0" max="200" step="0.5" value="0" id="task-time-number")
+                                        .form-group
+                                            label(for="task-priority-number") Priority
+                                            select.form-control(ng-model="task.priority")
+                                                option(value="1") Low
+                                                option(value="2") Medium
+                                                option(value="3") High
+                                        .form-group
+                                            button.btn.btn-danger.pull-right(ng-click="removeTask(task)")
+                                                span.glyphicon.glyphicon-remove-sign  Remove
+                        .form-group
+                            .col-md-2
+                                input.btn.btn-primary(type="button" ng-click="updateProject()" id="create-project-btn" value="Update")
+                            .col-md-2
+                                input.btn.btn-danger(type="button" ng-click="deleteProject()" id="create-project-btn" value="Remove")
+
+
+        .col-md-offset-1.col-md-5
+            ng-show("showCreateTaskPanel()")
+                div(ng-include="'/partials/task/create/create-task'")

@@ -1,0 +1,26 @@
+//Created by D on 11.2.2016 ã..
+
+.navbar-right
+    form#login-form.navbar-form(ng-controller="AuthFormController")
+        div(ng-hide="identity.isAuthenticated()")
+            .form-group
+                input.form-control(placeholder='Username', ng-model="username")
+            .form-group
+                input.form-control(type="password", placeholder='Password', ng-model="password")
+            button.form-control.btn.btn-default(ng-click="signin(username, password)") Sign In
+        div(ng-show="identity.isAuthenticated()")
+            .row
+                .col-md-8
+                    span(uib-dropdown on-toggle="toggled(open)")
+                        a.btn.btn-success#simple-dropdown(uib-dropdown-toggle)
+                            | {{identity.currentUser.username}}
+                        ul(uib-dropdown-menu aria-labelledby="simple-dropdown")
+                            li
+                                a(href="#/project/create", ng-click="") Create Project
+                                a(ng-href="#/{{identity.currentUser.profile}}/projects", ng-click="")  My Projects
+                                a(href="#/profile", ng-click="") Profile
+                                a(href="", ng-click="signout()") Sign Out
+                .col-md-4
+                    img(ng-src="/images/avatars/sm-{{avatar.name}}")
+
+

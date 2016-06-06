@@ -1,0 +1,23 @@
+//
+   Created by D on 27.5.2016 ã..
+.col-md-12(ng-controller="UserProfileCtrl")
+    .panel.panel-default
+        .panel-body
+            .row
+                .col-md-2
+                    a.thumbnail(href="")
+                        img(ng-src="/images/avatars/{{profile.avatar.name}}" alt="300x300" )
+                .col-md-7
+                    .row
+                        h3 {{profile.name}}
+                    .row
+                        small
+                            b {{profile.position}}
+                        hr
+                    .row
+                        span.glyphicon.glyphicon-envelope.btn-lg
+                        | {{profile.email}}
+                    .row
+                        span.glyphicon.glyphicon-phone.btn-lg
+                        | {{profile.phone}}
+

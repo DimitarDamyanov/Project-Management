@@ -1,0 +1,52 @@
+//Created by D on 29.4.2016 ã..
+div#create-project-cnt(ng-controller="CreateProjectCtrl")
+
+    .row
+        .col-md-5
+            .panel.panel-default
+                .panel-heading.panel-heading-custom
+                    h3.panel-title  Create Project
+                .panel-body
+                    form(name="createProject" novalidate)
+                        .form-group(ng-class="{ 'has-error': createProject.name.$invalid, 'has-success': !createProject.name.$invalid}")
+                            label(for="project-name-text") Project Name
+                            input.form-control(type="text" name="name" ng-model="project.name" placeholder="Enter project name" id="project-name-text" ng-pattern="validations.name.regex" required)
+                        span.help-block(ng-show="createProject.name.$error.pattern") {{validations.name.regex.message}}
+                        .form-group(ng-class="{ 'has-error': createProject.description.$invalid, 'has-success': !createProject.description.$invalid}")
+                            label(for="project-description-textarea") Project Description
+                            textarea.form-control(rows="3" name="description" ng-model= "project.description" placeholder="Enter project description" id="project-description-textarea" ng-pattern="validations.description.regex")
+                        span.help-block(ng-show="createProject.description.$error.pattern") {{validations.description.regex.message}}
+                        .form-group(ng-class="{ 'has-error': createProject.time.$invalid, 'has-success': !createProject.time.$invalid}")
+                            label(for="project-time-number") Time for completion (MD)
+                            input.form-control(type="number" name="time" ng-model= "project.overallTime" id="project-time-number" min=1 max=1000 required)
+                        .form-group
+                            label Participants
+                            //ul.list-inline#
+                            //   li(ng-repeat="p in project.participants")
+                            //      button.btn.btn-success(aria-label="Right Align" ng-click="removeParticipant($index)")
+                            //         | {{p.name}}
+                            //         span.glyphicon.glyphicon-remove(aria-hidden="true")
+                            .list-group
+                                a.list-group-item(ng-repeat="p in project.participants" ng-click="" ) {{p.name}}
+                                    span.pull-right.glyphicon.glyphicon-remove(aria-hidden="true" ng-click="removeParticipant($index)")
+                            .row
+                                .col-md-7
+                                    input.form-control(type="text" name="pa" ng-model="selected" typeahead-editable = "false" placeholder="Enter participants" uib-typeahead="p as p.name for p in profiles | filter:{name:$viewValue}")
+                                    //select.form-control(ng-model="selected")
+                                    //   option(ng-repeat="profile in profiles" value="{{$index}}") {{profile.name}}
+                                .col-md-2
+                                    //input.btn.btn-success.form-control(type="button" value="Add")
+                                    button.btn.btn-success(ng-click="addParticipant(selected)" aria-label="Left Align")
+                                        span.glyphicon.glyphicon-plus-sign(aria-hidden="true" ng-disabled="createProject.$dirty") Add
+                        .form-group
+                            input.btn.btn-info(type="button" ng-disabled="createProject.$invalid" ng-click="saveProject()" id="create-project-btn" value="Create")
+
+        script#participantsTemplate.html(type="text/ng-template")
+            .custom-popup-wrapper(ng-style="{top: position().top+'px', left: position().left+'px'}"
+            style="display: block;"
+            ng-show="isOpen() && !moveInProgress"
+            aria-hidden="{{!isOpen()}}")
+                p.message select location from drop down
+                ul.dropdown-menu(role="listbox")
+                    li(ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}")
+                        div(uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl")
