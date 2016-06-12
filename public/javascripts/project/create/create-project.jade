@@ -29,15 +29,16 @@ div#create-project-cnt(ng-controller="CreateProjectCtrl")
                             .list-group
                                 a.list-group-item(ng-repeat="p in project.participants" ng-click="" ) {{p.name}}
                                     span.pull-right.glyphicon.glyphicon-remove(aria-hidden="true" ng-click="removeParticipant($index)")
-                            .row
-                                .col-md-7
-                                    input.form-control(type="text" name="pa" ng-model="selected" typeahead-editable = "false" placeholder="Enter participants" uib-typeahead="p as p.name for p in profiles | filter:{name:$viewValue}")
-                                    //select.form-control(ng-model="selected")
-                                    //   option(ng-repeat="profile in profiles" value="{{$index}}") {{profile.name}}
-                                .col-md-2
-                                    //input.btn.btn-success.form-control(type="button" value="Add")
-                                    button.btn.btn-success(ng-click="addParticipant(selected)" aria-label="Left Align")
-                                        span.glyphicon.glyphicon-plus-sign(aria-hidden="true" ng-disabled="createProject.$dirty") Add
+                            //.row
+                            //    .col-md-7
+                            //        input.form-control(type="text" name="pa" ng-model="selected" typeahead-editable = "false" placeholder="Enter participants" uib-typeahead="p as p.name for p in profiles | filter:{name:$viewValue}")
+                            //        //select.form-control(ng-model="selected")
+                            //        //   option(ng-repeat="profile in profiles" value="{{$index}}") {{profile.name}}
+                            //    .col-md-2
+                            //        //input.btn.btn-success.form-control(type="button" value="Add")
+                            //        button.btn.btn-success(ng-click="addParticipant(selected)" aria-label="Left Align")
+                            //            span.glyphicon.glyphicon-plus-sign(aria-hidden="true" ng-disabled="createProject.$dirty") Add
+                            div(ng-include="'/partials/participants/add-participants'")
                         .form-group
                             input.btn.btn-info(type="button" ng-disabled="createProject.$invalid" ng-click="saveProject()" id="create-project-btn" value="Create")
 

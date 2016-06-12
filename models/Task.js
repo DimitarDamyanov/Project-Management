@@ -3,7 +3,8 @@
  */
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    UserProfile = require('.//UserProfile');
 
 var Task = new Schema({
     name: {type: String, required: true},
@@ -11,7 +12,7 @@ var Task = new Schema({
     overallTime: {type: Number, required: true},
     priority: {type: String, required: true},
     status: {type: String, required: true},
-    //assignTo: {type: String, required: true},
+    assignTo: {type: mongoose.Schema.Types.ObjectId, ref: 'UserProfile'},
     completion: {type: Number, required: true},
     createAt: {type: Date, default: Date.now}
 });

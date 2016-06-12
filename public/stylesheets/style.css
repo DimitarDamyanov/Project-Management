@@ -61,7 +61,7 @@ h3.panel-title {
     margin: 0;
 }
 
-#all-projects-cnt, #edit-project-cnt, #my-projects, #view-single-project-cnt, #registration-panel, #create-project-cnt {
+#all-projects-cnt, #edit-project-cnt, #my-projects, #view-single-project-cnt, #registration-panel, #create-project-cnt, #edit-user-profile-cnt {
     margin-top: 1%;
 }
 
@@ -111,3 +111,17 @@ h3.panel-title {
     border-radius: 0;
     box-shadow: none;
 }
+
+#task-filter-cnt span {
+    margin-left: 7px;
+    margin-right: 7px;
+
+}
+
+#task-filter-cnt {
+    margin-bottom: 3%;
+}
+
+/*.navbar .nav > li > a {*/
+/*font-size: 20px;*/
+/*}*/

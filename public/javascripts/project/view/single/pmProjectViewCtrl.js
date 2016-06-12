@@ -8,6 +8,7 @@ var ProjectViewController = function ($scope, $http, $routeParams, $location, $u
     ProjectService.retrieveSingleProjectsById(projectId).then(function (sucess) {
         $scope.project = ProjectService.getSingleProject();
         $scope.project.progress = ProjectService.calculateProgress($scope.project);
+        calculateTasksOverallTime($scope.project.tasks);
         $scope.project.progressBarType = ( $scope.project.progress > 75) ? 'success' : ( $scope.project.progress > 50 ? 'info'
             : ( $scope.project.progress > 25 ? 'warning' : 'danger'));
     });
@@ -19,6 +20,23 @@ var ProjectViewController = function ($scope, $http, $routeParams, $location, $u
         console.log(path);
         $location.url(path);
     };
+
+    $scope.setTaskPriority = function (priority) {
+        return priority == 1 ? 'Low' : (priority == 2) ? 'Medium' : (priority == 3) ? 'High' : 'N/A';
+    }
+
+    $scope.filterOptions = [{label: 'Name', value: 'name'}, {
+        label: 'Description',
+        value: 'description'
+    }];
+
+    function calculateTasksOverallTime(tasks) {
+        var overallTime = 0;
+        tasks.forEach(function (task) {
+            overallTime += task.overallTime;
+        });
+        $scope.taskOverallTime = overallTime;
+    }
 
     $scope.open = function (task) {
         EditTaskService.setCurrentTask(task);

@@ -3,15 +3,19 @@
 nav#main-nav.navbar.navbar-default.navbar-fixed-top(ng-controller="MainNavCtrl")
     .container-fluid
         .navbar-header
-            a.navbar-brand(href="#") Project Management
+            a.navbar-brand(href="#/project/all") Project Management
         .collapse.navbar-collapse
             ul.nav.navbar-nav
                 li
-                    a(href="#/project/all") Projects
+                    a(href="#/project/all")
+                        b Projects
                 li(ng-hide="identity.isAuthenticated()")
-                    a(href="#/account/register") Register
+                    a(href="#/account/register")
+                        b Register
                 li(ng-show="identity.isAuthenticated()")
-                    a(ng-href="#/{{identity.currentUser.profile}}/projects", ng-click="")  My Projects
+                    a(ng-href="#/{{identity.currentUser.profile}}/projects", ng-click="")
+                        b My Projects
                 li(ng-show="identity.isAuthenticated()")
-                    a(href="#/project/create", ng-click="") Create Project
+                    a(href="#/project/create", ng-click="")
+                        b Create Project
             div(ng-include="'/partials/account/login-form'")

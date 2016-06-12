@@ -23,4 +23,7 @@ div(ng-controller="CreateTaskCtrl")
                             option(value="2") Medium
                             option(value="3") High
                     .form-group
+                        label() Assign to
+                        select.form-control(ng-model="task.assignTo" ng-options="p._id as p.name for p in participants")
+                    .form-group
                         input.btn.btn-default.btn-primary(type="button" ng-disabled="!createTask.$valid" ng-click="addToProject()" id="create-task-btn" value="Create")

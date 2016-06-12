@@ -14,6 +14,7 @@ var routes = function (Project) {
         });
     });
     router.post('/update/:id', isAuthenticated, function (req, res, next) {
+        console.log(req.body.tasks);
         Project.findById(req.params.id, function (err, project) {
             //var prj = req.body;
             //var tasks = prj.tasks;
@@ -22,8 +23,11 @@ var routes = function (Project) {
             project.name = req.body.name;
             project.overallTime = req.body.overallTime;
             project.save(function (err, project) {
+
                 console.log('Saved  project');
+
                 if (err) {
+                    console.log(err);
                     res.send(err);
                 } else {
                     res.json({

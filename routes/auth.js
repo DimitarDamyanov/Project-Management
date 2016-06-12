@@ -9,7 +9,6 @@ var routes = function (User, UserProfile) {
     var router = express.Router();
 
     router.use(function (req, res, next) {
-        console.log(req.originalUrl);
         var url = req.originalUrl;
         switch (url) {
             case  '/login' :
@@ -60,8 +59,6 @@ var routes = function (User, UserProfile) {
 
     router.post('/register', function (req, res, next) {
         //validate the incoming information
-
-
         var userProfile = new UserProfile(req.body.profile);
         //set default avatar
         userProfile.avatar = "574b480bd40603181e2a346a";

@@ -1,35 +1,34 @@
 //
    Created by D on 27.5.2016 ã..
-.col-md-12(ng-controller="EditUserProfileCtrl")
+.col-md-12(ng-controller="EditUserProfileCtrl")#edit-user-profile-cnt
     .panel.panel-default
         .panel-body
             .row
                 .col-md-2
                     a.thumbnail(href="")
                         img(ng-src="/images/avatars/{{profile.avatar.name}}" alt="300x300" )
-                    //input.btn.btn-default.btn-file(type="file" nv-file-select="" uploader="uploader")
                     label.btn.btn-default.btn-file Browse
                         input(type="file" nv-file-select="" uploader="uploader" style="display:none;")
                     button.btn.btn-default.pull-right(ng-click="uploader.uploadAvatar()") Upload
                 .col-md-7
-                    form.form-horizontal
-                        .form-group
+                    form.form-horizontal(name="userProfileForm" novalidate)
+                        .form-group(ng-class="{ 'has-error': userProfileForm.name.$invalid, 'has-success': !userProfileForm.name.$invalid }")
                             label.col-md-2.control-label(for="profile-name") Name
                             .col-md-10
-                                input#profile-name.form-control(ng-model="profile.name")
-                        .form-group
+                                input#profile-name.form-control(name="name" ng-model="profile.name" ng-pattern="/^[a-zA-Z-,]+( {0,1}[a-zA-Z-,]){3,15}$/")
+                        .form-group(ng-class="{ 'has-error': userProfileForm.position.$invalid, 'has-success': !userProfileForm.position.$invalid }")
                             label.col-md-2.control-label(for="profile-name") Position
                             .col-md-10
-                                input#profile-name.form-control(ng-model="profile.position")
+                                input#profile-name.form-control(name="position" ng-model="profile.position" ng-pattern="/^([a-zA-Z]+ )*[a-zA-Z]+$/")
                         hr
-                        .form-group
+                        .form-group(ng-class="{ 'has-error': userProfileForm.email.$invalid, 'has-success': !userProfileForm.email.$invalid }")
                             label.col-md-2.control-label(for="profile-name") Email
                             .col-md-10
-                                input#profile-name.form-control(ng-model="profile.email")
-                        .form-group
+                                input#profile-name.form-control(name="email" type="email" ng-model="profile.email" required)
+                        .form-group(ng-class="{ 'has-error': userProfileForm.phone.$invalid, 'has-success': !userProfileForm.phone.$invalid }")
                             label.col-md-2.control-label(for="profile-name") Phone
                             .col-md-10
-                                input#profile-name.form-control(ng-model="profile.phone")
+                                input#profile-name.form-control(name="phone" ng-model="profile.phone" ng-pattern="phoneRegex" )
                         .form-group
                             .col-md-offset-2.col-md-2
-                                button.btn.btn-default(ng-click="updateProfile()") Submit
+                                button.btn.btn-success(ng-disabled="!userProfileForm.$valid" ng-click="updateProfile()") Submit

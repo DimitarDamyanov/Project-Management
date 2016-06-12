@@ -26,10 +26,9 @@ div#all-projects-cnt(ng-controller="ProjectCtrl").panel
                 p.list-group-item-text {{project.overallTime}} man days
             a.list-group-item(href="")
                 h4.list-group-item-heading Participants
-                p.list-group-item-text
-                    ul.list-inline
-                        li(ng-repeat="p in project.participants")
-                            button.btn  {{p.name}}
+                p
+                    a.list-group-item(ng-repeat="p in project.participants" ng-click="" ng-href="/#/profile/{{p._id}}") {{p.name}}
+                        span.pull-right.glyphicon.glyphicon-user(aria-hidden="true")
             a.list-group-item(href="")
                 h4.list-group-item-heading Progress
                 p.list-group-item-text

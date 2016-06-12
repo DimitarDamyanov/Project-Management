@@ -34,8 +34,15 @@ div#view-single-project-cnt(ng-controller="ProjectViewCtrl")
                                 span(style="color:white; white-space:nowrap;") Progress: {{project.progress}}%
                 .panel-body.view-project
                     h3  Tasks
+                    p Overall time: {{taskOverallTime}} man days
+                    form.form.form-inline#task-filter-cnt
+                        .form-group
+                            input.form-control(type="text" placeholder="Filter" ng-model="projectFilter")
+                            span by
+                            select#asd.form-control(ng-model="filter" ng-options="item.value as item.label for item in filterOptions" ng-init= "filter=filterOptions[0].value")
+
                     uib-accordion#tasks-panel(close-others="oneAtATime")
-                        uib-accordion-group.project-view(ng-repeat="task in project.tasks" heading="{{task.name}}" )
+                        uib-accordion-group.project-view(ng-repeat="task in project.tasks | filter : projectFilter" heading="{{task.name}}" )
                             .list-group
                                 a.list-group-item(href="")
                                     h4.list-group-item-heading Description
@@ -45,7 +52,10 @@ div#view-single-project-cnt(ng-controller="ProjectViewCtrl")
                                     p.list-group-item-text {{task.overallTime}}
                                 a.list-group-item(href="")
                                     h4.list-group-item-heading Priority
-                                    p.list-group-item-text {{task.priority}}
+                                    p.list-group-item-text {{setTaskPriority(task.priority)}}
+                                a.list-group-item(href="#/profile/{{task.assignTo}}")
+                                    h4 Assigned to:
+                                    div(ng-init = "profileId = task.assignTo" ng-include="'partials/profile/embeddedView/emb-user-profile'")
                                 a.list-group-item(href="")
                                     h4.list-group-item-heading Progress
                                     p.list-group-item-text

@@ -11,10 +11,13 @@ var createTaskController = function ($scope, $http, ProjectService) {
             overallTime: $scope.task.overallTime,
             priority: $scope.task.priority,
             status: 'New',
+            assignTo: $scope.task.assignTo,
             completion: 0
         };
         ProjectService.pushNewTaskToProject(task);
     }
+
+    $scope.participants = ProjectService.getSingleProject().participants;
 };
 
 app.controller('CreateTaskCtrl', ['$scope', '$http', 'ProjectService', createTaskController]);

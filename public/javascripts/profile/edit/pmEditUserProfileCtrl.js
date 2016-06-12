@@ -1,7 +1,7 @@
 /**
  * Created by D on 27.5.2016 ã..
  */
-var EditUserProfileCtrl = function ($scope, FileUploader, pmIdentity, userProfileService) {
+var EditUserProfileCtrl = function ($scope, $location, FileUploader, pmIdentity, userProfileService) {
     //load profile
     userProfileService.getProfileById(pmIdentity.currentUser.profile).then(function (success) {
         if (success) {
@@ -11,6 +11,7 @@ var EditUserProfileCtrl = function ($scope, FileUploader, pmIdentity, userProfil
 
     $scope.updateProfile = function () {
         userProfileService.updateProfile($scope.profile);
+        $location.url('/project/all');
     };
     var uploader = $scope.uploader = new FileUploader({
         url: 'upload/avatar/image'
@@ -24,12 +25,6 @@ var EditUserProfileCtrl = function ($scope, FileUploader, pmIdentity, userProfil
         }
     });
 
-    //$scope.uploader.onBeforeUploadItem = onBeforeUploadItem;
-    //
-    //function onBeforeUploadItem(item) {
-    //    item.formData.push({userid: gpIdentity.currentUser._id});
-    //}
-
     uploader.onCompleteItem = function (item, response, status, headers) {
         if (status == 200) {
             $scope.profile.avatar = response;
@@ -41,7 +36,7 @@ var EditUserProfileCtrl = function ($scope, FileUploader, pmIdentity, userProfil
         uploader.uploadAll();
     }
 
-
+    $scope.phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
 };
 
-app.controller('EditUserProfileCtrl', ['$scope', 'FileUploader', 'pmIdentity', 'userProfileService', EditUserProfileCtrl]);
+app.controller('EditUserProfileCtrl', ['$scope', '$location', 'FileUploader', 'pmIdentity', 'userProfileService', EditUserProfileCtrl]);
