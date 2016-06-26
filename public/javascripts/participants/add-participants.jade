@@ -1,0 +1,10 @@
+//
+   Created by D on 11.6.2016 �..
+
+div(ng-controller="AddParticipantsCtrl")
+    .row
+        .col-md-7
+            input.form-control(type="text" name="pa" autocomplete="off" ng-model="selected" typeahead-editable = "false" placeholder="Enter participants" uib-typeahead="p as p.name for p in profiles | filter:{name:$viewValue}")
+        .col-md-2
+            button.btn.btn-success(ng-click="addParticipant(selected)" aria-label="Left Align")
+                span.glyphicon.glyphicon-plus-sign(aria-hidden="true") Add
