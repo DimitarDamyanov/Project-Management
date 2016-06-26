@@ -1,5 +1,5 @@
 /**
- * Created by D on 13.2.2016 ã..
+ * Created by D on 13.2.2016 ï¿½..
  */
 app.factory('pmAuth', function ($http, pmIdentity, $q) {
     return {

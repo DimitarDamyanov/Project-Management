@@ -60,7 +60,7 @@ app.use(function (req, res, next) {
     next(err);
 });
 
-app.listen(80, '192.168.1.3', function () {
+app.listen(80, '192.168.1.2', function () {
     console.log('Gulp Running on port:' + 3000);
 });
 
